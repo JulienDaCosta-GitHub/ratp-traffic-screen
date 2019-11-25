@@ -1,0 +1,22 @@
+body {
+    background-color: #6091ad;
+}
+
+.blink {
+    animation: blinker 1s linear infinite;
+}
+
+@keyframes blinker {
+    50% {
+        opacity: 0;
+    }
+}
+
+.col--lines .time {
+    background-color: black;
+    color: #FFFF00;
+}
+
+.col--traffic {
+    background-color: #ffffff;
+}

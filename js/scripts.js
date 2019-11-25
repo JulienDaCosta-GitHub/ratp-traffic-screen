@@ -26,14 +26,39 @@ function getApiData() {
                 }
             }
             document.querySelector('.status h1').innerHTML = hasProblem ? 'Incident(s)' : 'Trafic normal'
+            
             templateType('rers', data.result.rers)
+            templateType('metros', data.result.metros)
+            templateType('tramways', data.result.tramways)
         }
     }
     xhr.open('GET', 'https://api-ratp.pierre-grimaud.fr/v4/traffic');
     xhr.send()
 }
 function templateType(type, data) {
-    console.log(type)
+    let template = document.querySelector('.lines--' + type)
+    template.innerHTML = '<div class="col-sm-2 text-center">' + type + '</div>'
+
+    const lines = data.length
+
+    for(let i = 0; i < lines; i++) {
+        template.innerHTML += '<div class="col-sm-2 text-center ' + getBackgroundColor(data[i].slug) +'">' + data[i].line + '</div>'
+    }
+}
+
+function getBackgroundColor(slug) {
+    switch (slug) {
+        case 'critical':
+            return 'line--critical'
+            break;
+        case 'normal_trav':
+            return 'line--works'
+            break;
+        case 'normal':
+            default:
+                return ''
+                break;
+    }
 }
 
 //  Timer
